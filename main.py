@@ -2,10 +2,9 @@ import os
 import time
 import requests
 
-NOTION_TOKEN = os.environ.get("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
-")
-TIMER_DB_ID = os.environ.get("1e7c9afdd53b809bbbe3d6aafae6fdc6")
-VAGOK_DB_ID = os.environ.get("1fcc9afdd53b80948663de3af2f442c3")
+NOTION_TOKEN = os.environ.get("NOTION_TOKEN")
+TIMER_DB_ID = os.environ.get("TIMER_DB_ID")
+VAGOK_DB_ID = os.environ.get("VAGOK_DB_ID")
 
 HEADERS = {
      "Authorization": f"Bearer {NOTION_TOKEN}",
