@@ -7,8 +7,7 @@ TIMER_DB_ID = os.environ.get("TIMER_DB_ID")
 VAGOK_DB_ID = os.environ.get("VAGOK_DB_ID")
 
 HEADERS = {
-     "Authorization": f"Bearer {NOTION_TOKEN}",
-}",
+    "Authorization": f"Bearer {NOTION_TOKEN}",
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json"
 }
