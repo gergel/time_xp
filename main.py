@@ -84,3 +84,8 @@ if __name__ == "__main__":
     while True:
         main()
         time.sleep(60)
+
+print("Timer Person:", person_name)
+print("Editor listában nézettek:")
+for editor in editors:
+    print("  -", editor["properties"]["Person"]["people"][0]["name"])
