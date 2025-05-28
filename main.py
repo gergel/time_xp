@@ -59,9 +59,6 @@ def main():
 
     for entry in timers:
         page_id = entry["id"]
-
-	print("▶️ Feldolgozás alatt:", props.get("Name", {}).get("title", [{}])[0].get("text", {}).get("content", "Nincs név"))
-
         try:
             person = entry["properties"]["Person"]["people"][0]["name"]
         except (KeyError, IndexError):
