@@ -18,7 +18,7 @@ def get_timer_entries():
     
     data = res.json()
     if "results" not in data:
-        print("❌ Nem jött vissza adat:", NOTION_TOKEN)
+        print("❌ Nem jött vissza adat:", TIMER_DB_ID)
 
         return []
 
