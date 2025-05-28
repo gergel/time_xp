@@ -14,22 +14,15 @@ HEADERS = {
 
 def get_timer_entries():
     url = f"https://api.notion.com/v1/databases/{TIMER_DB_ID}/query"
-    payload = {
-        "filter": {
-            "and": [
-                {
-                    "property": "Státusz",
-                    "status": {"equals": "Elindítva"}
-                },
-                {
-                    "property": "Vágók",
-                    "relation": {"is_empty": True}
-                }
-            ]
-        }
-    }
-    res = requests.post(url, headers=HEADERS, json=payload)
-    return res.json().get("results", [])
+    res = requests.post(url, headers=HEADERS)
+    
+    data = res.json()
+    if "results" not in data:
+        print("❌ Nem jött vissza adat:", data)
+        return []
+
+    return data["results"]
+
 
 def get_vago_by_name(name):
     url = f"https://api.notion.com/v1/databases/{VAGOK_DB_ID}/query"
@@ -66,6 +59,9 @@ def main():
 
     for entry in timers:
         page_id = entry["id"]
+
+	print("▶️ Feldolgozás alatt:", props.get("Name", {}).get("title", [{}])[0].get("text", {}).get("content", "Nincs név"))
+
         try:
             person = entry["properties"]["Person"]["people"][0]["name"]
         except (KeyError, IndexError):
@@ -81,6 +77,7 @@ def main():
                 print(f"⚠️ Nem sikerült frissíteni: {person}")
         else:
             print(f"❌ Nem található vágó: {person}")
+
 
 if __name__ == "__main__":
     while True:
