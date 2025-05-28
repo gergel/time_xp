@@ -33,23 +33,25 @@ def get_timer_entries():
 
 def get_vago_by_name(name):
     url = f"https://api.notion.com/v1/databases/{VAGOK_DB_ID}/query"
-    payload = {
-        "filter": {
-            "property": "Person",
-            "people": {
-                "contains": name
-            }
-        }
-    }
-    res = requests.post(url, headers=HEADERS, json=payload)
+    res = requests.post(url, headers=HEADERS)
     results = res.json().get("results", [])
-    return results[0]["id"] if results else None
+
+    for item in results:
+        try:
+            vago_name = item["properties"]["Person"]["people"][0]["name"]
+            if vago_name == name:
+                return item["id"]
+        except (KeyError, IndexError):
+            continue
+
+    return None
+
 
 def update_timer_entry_with_vago(timer_page_id, vago_page_id):
     url = f"https://api.notion.com/v1/pages/{timer_page_id}"
     payload = {
         "properties": {
-            "Utómunka_2": {
+            "Vágók": {
                 "relation": [{"id": vago_page_id}]
             }
         }
@@ -84,8 +86,3 @@ if __name__ == "__main__":
     while True:
         main()
         time.sleep(60)
-
-print("Timer Person:", person_name)
-print("Editor listában nézettek:")
-for editor in editors:
-    print("  -", editor["properties"]["Person"]["people"][0]["name"])
