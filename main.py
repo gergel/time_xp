@@ -55,6 +55,12 @@ def update_timer_entry_with_vago(timer_page_id, vago_page_id):
 
 def main():
     print("🔍 Ellenőrzés indul...")
+
+	print("✅ NOTION_TOKEN:", os.environ.get("NOTION_TOKEN"))
+	print("✅ TIMER_DB_ID:", os.environ.get("TIMER_DB_ID"))
+	print("✅ VAGOK_DB_ID:", os.environ.get("VAGOK_DB_ID"))
+
+
     timers = get_timer_entries()
     print(f"📋 Talált bejegyzés: {len(timers)}")
 
