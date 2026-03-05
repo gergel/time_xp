@@ -11,7 +11,7 @@ HEADERS = {
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json"
 }
-
+"""
 def get_main_entries():
    
     url = f"https://api.notion.com/v1/databases/{MAIN_DB_ID}/query"
@@ -31,6 +31,34 @@ def get_main_entries():
     }
     res = requests.post(url, headers=HEADERS, json=payload)
     return res.json().get("results", [])
+"""
+
+def get_main_entries():
+    url = f"https://api.notion.com/v1/databases/{MAIN_DB_ID}/query"
+    payload = {
+        "filter": {
+            "and": [
+                {
+                    "property": "jóváírva",
+                    "checkbox": {"equals": False}
+                },
+                {
+                    "property": "jóváírandó pont",
+                    "number": {"is_not_empty": True}
+                }
+            ]
+        }
+    }
+    res = requests.post(url, headers=HEADERS, json=payload)
+
+    # DEBUG:
+    if res.status_code != 200:
+        print("❗ Notion query failed:", res.status_code, res.text)
+        return []
+    data = res.json()
+    if not data.get("results"):
+        print("ℹ️ 0 results. Notion response:", data)  # vigyázz, hosszú lehet
+    return data.get("results", [])
 
 def get_vago_id_by_person_name(name):
     url = f"https://api.notion.com/v1/databases/{VAGOK_DB_ID}/query"
