@@ -13,11 +13,20 @@ HEADERS = {
 }
 
 def get_main_entries():
+   
     url = f"https://api.notion.com/v1/databases/{MAIN_DB_ID}/query"
     payload = {
         "filter": {
-            "property": "jóváírva",
-            "checkbox": {"equals": False}
+            "and": [
+                {
+                    "property": "ellenőrzés pont jóváírás",
+                    "checkbox": {"equals": False}
+                },
+                {
+                    "property": "jóváírandó pont",
+                    "number": {"is_not_empty": True}
+                }
+            ]
         }
     }
     res = requests.post(url, headers=HEADERS, json=payload)
