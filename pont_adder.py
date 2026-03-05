@@ -11,7 +11,7 @@ HEADERS = {
     "Notion-Version": "2022-06-28",
     "Content-Type": "application/json"
 }
-"""
+
 def get_main_entries():
    
     url = f"https://api.notion.com/v1/databases/{MAIN_DB_ID}/query"
@@ -23,7 +23,7 @@ def get_main_entries():
                     "checkbox": {"equals": False}
                 },
                 {
-                    "property": "jóváírandó pont",
+                    "property": "jóváirandó pont",
                     "number": {"is_not_empty": True}
                 }
             ]
@@ -59,7 +59,7 @@ def get_main_entries():
     if not data.get("results"):
         print("ℹ️ 0 results. Notion response:", data)  # vigyázz, hosszú lehet
     return data.get("results", [])
-
+"""
 def get_vago_id_by_person_name(name):
     url = f"https://api.notion.com/v1/databases/{VAGOK_DB_ID}/query"
     payload = {
