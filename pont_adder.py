@@ -19,7 +19,7 @@ def get_main_entries():
         "filter": {
             "and": [
                 {
-                    "property": "ellenőrzés pont jóváírás",
+                    "property": "jóváírva",
                     "checkbox": {"equals": False}
                 },
                 {
