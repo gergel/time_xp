@@ -16,16 +16,9 @@ def get_timer_entries():
     url = f"https://api.notion.com/v1/databases/{TIMER_DB_ID}/query"
     payload = {
         "filter": {
-            "and": [
-                {
-                    "property": "Státusz",
-                    "status": {"equals": "Elindítva"}
-                },
-                {
+           
                     "property": "Vágók",
                     "relation": {"is_empty": True}
-                }
-            ]
         }
     }
     res = requests.post(url, headers=HEADERS, json=payload)
