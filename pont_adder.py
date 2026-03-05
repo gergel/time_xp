@@ -25,6 +25,10 @@ def get_main_entries():
                 {
                     "property": "jóváirandó pont",
                     "number": {"is_not_empty": True}
+                },
+                {
+                    "property": "Aki ellenőrzésbe tette 1",
+                    "person": {"is_not_empty": True}
                 }
             ]
         }
