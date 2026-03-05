@@ -67,7 +67,7 @@ def mark_as_processed(main_page_id):
     url = f"https://api.notion.com/v1/pages/{main_page_id}"
     payload = {
         "properties": {
-            "ellenőrzés pont jóváírás": {
+            "jóváírva": {
                 "checkbox": True
             }
         }
