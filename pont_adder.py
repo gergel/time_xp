@@ -16,7 +16,7 @@ def get_main_entries():
     url = f"https://api.notion.com/v1/databases/{MAIN_DB_ID}/query"
     payload = {
         "filter": {
-            "property": "ellenőrzés pont jóváírás",
+            "property": "jóváírva",
             "checkbox": {"equals": False}
         }
     }
